@@ -2,11 +2,17 @@
 #include<iomanip> //For using setw(), setprecision(), ...
 using namespace std;
 
-int main(){	
+int main(){
+	double loan,rate,ppy;
+	int i = 2;
 	cout << "Enter initial loan: ";
+	cin>>loan;
 	cout << "Enter interest rate per year (%): ";
+	cin>>rate;
 	cout << "Enter amount you can pay per year: ";
-
+	cin>>ppy;
+	double PrevBalance,Interest,Total,NewBalance; 
+	PrevBalance = loan;                          
 	//use 'setw' to set width of table and 'left' to set left-alignment
 	//you can change input argument of 'setw()' to see the effect
 	//Try to change from 'left' to 'right' and see the effect
@@ -22,12 +28,36 @@ int main(){
 	//you can change input argument of 'setprecision()' to see the effect
 	cout << fixed << setprecision(2); 
 	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
-	cout << "\n";	
+	cout << setw(13) << left << PrevBalance;
+	Interest=PrevBalance*(rate/100);
+	cout << setw(13) << left << Interest;
+	Total = PrevBalance+Interest;
+	cout << setw(13) << left << Total;
+	if(ppy > Total){
+		ppy = Total;
+	}
+	cout << setw(13) << left << ppy;
+	NewBalance = Total-ppy;
+	cout << setw(13) << left << NewBalance;
+	cout << "\n";
+	for(; NewBalance > 0 ;){
+	PrevBalance = NewBalance;
+	cout << fixed << setprecision(2); 
+	cout << setw(13) << left << i; 
+	cout << setw(13) << left << PrevBalance;
+	Interest=PrevBalance*(rate/100);
+	cout << setw(13) << left << Interest;
+	Total = PrevBalance+Interest;
+	cout << setw(13) << left << Total;
+	if(ppy > Total){
+		ppy = Total;
+	}
+	cout << setw(13) << left << ppy;
+	NewBalance = Total-ppy;
+	cout << setw(13) << left << NewBalance;
+	cout << "\n";
+	i++;
+	}	
 	
 	return 0;
 }
